@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Next.js 15 RC: Features, Comparisons, and Code Examples</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans">
+
+  <!-- Header -->
+  <header class="bg-gradient-to-r from-purple-700 to-indigo-600 text-white py-8 shadow-lg">
+    <div class="max-w-6xl mx-auto text-center">
+      <h1 class="text-4xl font-extrabold">Next.js 15 RC: Features, Comparisons, and Code Examples</h1>
+      <p class="mt-3 text-lg">Explore the cutting-edge features and improvements in the latest release candidate of Next.js.</p>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-5xl mx-auto mt-10 px-6">
+    
+    <!-- Introduction -->
+    <section class="bg-white shadow-md rounded-lg p-8 mb-8">
+      <h2 class="text-3xl font-bold text-purple-700">Introduction</h2>
+      <p class="mt-3 text-lg">
+        The release of Next.js 15 RC marks another milestone for the React-based framework, delivering innovations in routing, API handling, image optimization, caching, and development tooling. 
+        With this version, Next.js focuses on improving flexibility, scalability, and performance, addressing the needs of both small projects and enterprise-scale applications.
+      </p>
+    </section>
+
+    <!-- Enhanced Routing System -->
+    <section class="bg-white shadow-md rounded-lg p-8 mb-8">
+      <h2 class="text-3xl font-bold text-purple-700">1. Enhanced Routing System</h2>
+      <p class="mt-3 text-lg">
+        The routing system in Next.js 15 has been enhanced with support for nested layouts, parallel routes, and route groups. 
+        Nested layouts allow developers to define reusable layouts at various levels of the application, improving code organization and scalability.
+      </p>
+      <p class="mt-3 text-lg">
+        Parallel routes allow different sections of the page to load concurrently, improving performance and reducing load times. 
+        For example, a sidebar and main content can be fetched simultaneously, ensuring users see content faster.
+      </p>
+      <pre class="bg-gray-100 p-4 rounded mt-4 overflow-auto text-sm">
+<code>
+// app/layout.js
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <div id="sidebar">Sidebar Content</div>
+        {children}
+      </body>
+    </html>
+  );
+}
+
+// app/page.js
+export default function Page() {
+  return <h1>Main Content</h1>;
+}
+</code>
+      </pre>
+    </section>
+
+    <!-- Edge API Routes -->
+    <section class="bg-white shadow-md rounded-lg p-8 mb-8">
+      <h2 class="text-3xl font-bold text-purple-700">2. Edge API Routes</h2>
+      <p class="mt-3 text-lg">
+        With Next.js 15, API routes can now run on Vercel’s Edge Network, ensuring lightning-fast responses and global scalability. 
+        These Edge API routes are particularly useful for latency-sensitive applications like e-commerce or streaming platforms.
+      </p>
+      <pre class="bg-gray-100 p-4 rounded mt-4 overflow-auto text-sm">
+<code>
+export const config = { runtime: 'edge' };
+
+export default async function handler(req) {
+  return new Response(JSON.stringify({ message: 'Hello from the Edge!' }), {
+    headers: { 'Content-Type': 'application/json' },
+  });
+}
+</code>
+      </pre>
+    </section>
+
+    <!-- Advanced Caching -->
+    <section class="bg-white shadow-md rounded-lg p-8 mb-8">
+      <h2 class="text-3xl font-bold text-purple-700">3. Advanced Caching Control</h2>
+      <p class="mt-3 text-lg">
+        Caching behavior has been redefined in Next.js 15. By default, fetch requests, route handlers, and client router caches are uncached, ensuring dynamic content remains up-to-date. Developers can explicitly define caching strategies based on their use case.
+      </p>
+      <p class="mt-3 text-lg">Example of specifying a caching strategy:</p>
+      <pre class="bg-gray-100 p-4 rounded mt-4 overflow-auto text-sm">
+<code>
+const data = await fetch('https://api.example.com/data', { cache: 'force-cache' });
+</code>
+      </pre>
+    </section>
+
+    <!-- Turbopack Stability -->
+    <section class="bg-white shadow-md rounded-lg p-8 mb-8">
+      <h2 class="text-3xl font-bold text-purple-700">4. Turbopack Stability</h2>
+      <p class="mt-3 text-lg">
+        Turbopack, the successor to Webpack introduced in earlier versions, is now stable in Next.js 15. It significantly reduces build times and improves refresh rates, making the development process smoother and more efficient.
+      </p>
+      <p class="mt-3 text-lg">Activate Turbopack when creating a new Next.js project:</p>
+      <pre class="bg-gray-100 p-4 rounded mt-4 overflow-auto text-sm">
+<code>
+npx create-next-app@latest my-app --turbo
+</code>
+      </pre>
+    </section>
+
+    <!-- Feature Comparison -->
+    <section class="bg-white shadow-md rounded-lg p-8 mb-8">
+      <h2 class="text-3xl font-bold text-purple-700">Feature Comparison: Next.js 14 vs Next.js 15</h2>
+      <table class="w-full mt-4 border-collapse border border-gray-300">
+        <thead class="bg-gray-200">
+          <tr>
+            <th class="border p-3 text-left">Feature</th>
+            <th class="border p-3 text-left">Next.js 14</th>
+            <th class="border p-3 text-left">Next.js 15 RC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="border p-3">Routing</td>
+            <td class="border p-3">Basic Routing</td>
+            <td class="border p-3">Nested Layouts, Parallel Routes</td>
+          </tr>
+          <tr>
+            <td class="border p-3">Streaming</td>
+            <td class="border p-3">Partial Streaming</td>
+            <td class="border p-3">Automatic Streaming</td>
+          </tr>
+          <tr>
+            <td class="border p-3">Caching</td>
+            <td class="border p-3">Cached by Default</td>
+            <td class="border p-3">Uncached by Default</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Conclusion -->
+    <section class="bg-white shadow-md rounded-lg p-8 mb-8">
+      <h2 class="text-3xl font-bold text-purple-700">Conclusion</h2>
+      <p class="mt-3 text-lg">
+        Next.js 15 RC builds upon the robust foundation of previous versions, introducing critical enhancements that make development faster, applications more performant, and user experiences smoother. Whether you are building a small personal project or a large-scale enterprise app, the innovations in this version offer something for everyone.
+      </p>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-purple-700 text-white py-4 text-center">
+    <p>&copy; 2024 Next.js Insights. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
